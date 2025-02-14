@@ -1,0 +1,146 @@
+/* Importing futuristic font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+
+/* Base styles with a dark futuristic theme */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0f1b21 0%, #1a2c37 50%, #0f1b21 100%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #00fff2;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Creating a grid background effect */
+body::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        linear-gradient(rgba(6, 234, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6, 234, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: rotate(45deg);
+    animation: gridMove 20s linear infinite;
+    z-index: 1;
+}
+
+@keyframes gridMove {
+    0% { transform: rotate(45deg) translate(-50%, -50%); }
+    100% { transform: rotate(45deg) translate(0, 0); }
+}
+
+/* Main menu container with glassmorphism effect */
+#mainMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(16, 28, 37, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 255, 242, 0.2),
+                inset 0 0 20px rgba(0, 255, 242, 0.1);
+    border: 1px solid rgba(0, 255, 242, 0.1);
+    position: relative;
+    z-index: 2;
+    min-width: 300px;
+}
+
+/* Glowing border effect for main menu */
+#mainMenu::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00fff2, #0066ff, #00fff2);
+    border-radius: 22px;
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.5;
+}
+
+/* Futuristic button styling */
+#mainMenu button {
+    margin: 15px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid #00fff2;
+    border-radius: 8px;
+    color: #00fff2;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Button hover effects */
+#mainMenu button:hover {
+    background: rgba(0, 255, 242, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 242, 0.5),
+                inset 0 0 10px rgba(0, 255, 242, 0.3);
+    transform: translateY(-2px);
+}
+
+#mainMenu button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 242, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+#mainMenu button:hover::before {
+    left: 100%;
+}
+
+/* Scoreboard styling */
+#scoreBoard {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(16, 28, 37, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 242, 0.3);
+    color: #00fff2;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 20px rgba(0, 255, 242, 0.2);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+/* Adding responsive design */
+@media (max-width: 768px) {
+    #mainMenu {
+        padding: 30px;
+        min-width: 250px;
+    }
+
+    #mainMenu button {
+        padding: 12px 24px;
+        font-size: 16px;
+        width: 180px;
+    }
+}
