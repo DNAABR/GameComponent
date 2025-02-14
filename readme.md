@@ -363,3 +363,33 @@ input fields
 
 
 
+components/
+├── buttons/
+│   ├── Button.js
+│   ├── IconButton.js
+│   ├── ToggleButton.js
+│   └── ...
+├── forms/
+│   ├── Input.js
+│   ├── Textarea.js
+│   ├── Select.js
+│   ├── Checkbox.js
+│   ├── RadioButton.js
+│   └── ...
+├── modals/
+│   ├── Modal.js
+│   ├── ConfirmationModal.js
+│   ├── AlertModal.js
+│   └── ...
+├── layouts/
+│   ├── Header.js
+│   ├── Footer.js
+│   ├── Sidebar.js
+│   ├── GridLayout.js
+│   └── ...
+├── cards/
+│   ├── ProfileCard.js
+│   ├── ProductCard.js
+│   ├── InfoCard.js
+│   └── ...
+└── ...
