@@ -1,13 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Menu</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Main Menu</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2c3e50; /* Dark blue background */
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Menu Container */
+    .menu-container {
+      text-align: center;
+    }
+
+    /* Title Styling */
+    .title {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    /* Logo Icon */
+    .logo-icon {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 30px;
+      background-color: #ecf0f1; /* Placeholder for logo */
+      border-radius: 10px;
+    }
+
+    /* Buttons Styling */
+    .menu-button {
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #3498db; /* Light blue button */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-button:hover {
+      background-color: #2980b9; /* Slightly darker blue on hover */
+    }
+
+    /* Button Focus Outline */
+    .menu-button:focus {
+      outline: 2px solid #f1c40f; /* Yellow outline for accessibility */
+    }
+  </style>
 </head>
 <body>
-    <h1>Main Menu</h1>
-    <script src="scripts.js"></script>
+  <div class="menu-container">
+    <h1 class="title">GAME TITLE</h1>
+    <div class="logo-icon"></div> <!-- Placeholder for logo -->
+    <button id="play-button" class="menu-button">PLAY/START</button>
+    <button id="settings-button" class="menu-button">SETTINGS</button>
+    <button id="how-to-play-button" class="menu-button">HOW TO PLAY</button>
+    <button id="join-us-button" class="menu-button">JOIN US</button>
+    <button id="credits-button" class="menu-button">CREDITS</button>
+  </div>
+
+  <script>
+    // Add event listeners to buttons
+    document.getElementById('play-button').addEventListener('click', () => {
+      alert('Play/Start button clicked!');
+    });
+
+    document.getElementById('settings-button').addEventListener('click', () => {
+      alert('Settings button clicked!');
+    });
+
+    document.getElementById('how-to-play-button').addEventListener('click', () => {
+      alert('How to Play button clicked!');
+    });
+
+    document.getElementById('join-us-button').addEventListener('click', () => {
+      alert('Join Us button clicked!');
+    });
+
+    document.getElementById('credits-button').addEventListener('click', () => {
+      alert('Credits button clicked!');
+    });
+  </script>
 </body>
 </html>
