@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Settings</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #222;
+            font-family: sans-serif;
+            color: #fff;
+        }
+
+        .settings-container {
+            padding: 1.5rem;
+            background: #333;
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            margin: 0.5rem 0;
+            font-weight: normal;
+        }
+
+        .slider-container, .checkbox-container, .difficulty-buttons {
+            margin: 1rem 0;
+        }
+
+        .slider, button, input[type="checkbox"] {
+            margin-top: 0.5rem;
+        }
+
+        button {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .difficulty-button.active {
+            background: #555;
+            color: #fff;
+        }
+
+        button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <h1>Settings</h1>
+
+        <h2>Audio</h2>
+        <div class="slider-container">
+            <label>Music</label>
+            <input type="range" min="0" max="100" value="100">
+        </div>
+        <div class="slider-container">
+            <label>Effects</label>
+            <input type="range" min="0" max="100" value="100">
+        </div>
+
+        <h2>Difficulty</h2>
+        <div class="difficulty-buttons">
+            <button class="difficulty-button">Easy</button>
+            <button class="difficulty-button active">Normal</button>
+            <button class="difficulty-button">Hard</button>
+        </div>
+
+        <h2>Display</h2>
+        <div class="checkbox-container">
+            <input type="checkbox" id="fullscreen"> Fullscreen
+        </div>
+
+        <button>Back</button>
+    </div>
+</body>
+</html>

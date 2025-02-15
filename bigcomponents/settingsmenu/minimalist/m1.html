@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Settings</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .settings-container {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-section {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .settings-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        .slider-container {
+            margin: 0.5rem 0;
+        }
+
+        .slider-container label {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .difficulty-button {
+            flex: 1;
+            padding: 0.5rem;
+            background: #eaeaea;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .difficulty-button.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .difficulty-button:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+        .controls-button, .back-button {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .controls-button:hover, .back-button:hover {
+            background: #2980b9;
+        }
+
+        .checkbox-container {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <h1 class="title">Settings</h1>
+
+        <div class="settings-section">
+            <h2>Audio</h2>
+            <div class="slider-container">
+                <label for="music">Music Volume</label>
+                <input type="range" id="music" class="slider" min="0" max="100" value="100">
+            </div>
+            <div class="slider-container">
+                <label for="sfx">Sound Effects</label>
+                <input type="range" id="sfx" class="slider" min="0" max="100" value="100">
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Controls</h2>
+            <button class="controls-button" id="configureControls">Configure Controls</button>
+        </div>
+
+        <div class="settings-section">
+            <h2>Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-button" data-difficulty="easy">Easy</button>
+                <button class="difficulty-button active" data-difficulty="normal">Normal</button>
+                <button class="difficulty-button" data-difficulty="hard">Hard</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Display</h2>
+            <div class="checkbox-container">
+                <input type="checkbox" id="fullscreen">
+                <label for="fullscreen">Fullscreen</label>
+            </div>
+        </div>
+
+        <button class="back-button" id="backButton">Back to Main Menu</button>
+    </div>
+
+    <script>
+        const difficultyButtons = document.querySelectorAll('.difficulty-button');
+        difficultyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                difficultyButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                console.log(`Difficulty set to: ${button.dataset.difficulty}`);
+            });
+        });
+
+        document.getElementById('configureControls').addEventListener('click', () => {
+            console.log('Opening controls configuration...');
+        });
+
+        document.getElementById('backButton').addEventListener('click', () => {
+            console.log('Returning to main menu...');
+        });
+
+        document.getElementById('fullscreen').addEventListener('change', (e) => {
+            console.log(`Fullscreen: ${e.target.checked}`);
+        });
+
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                console.log(`${e.target.id} volume: ${e.target.value}`);
+            });
+        });
+    </script>
+</body>
+</html>

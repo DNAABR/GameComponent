@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Settings</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f4;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+        }
+        .settings-container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+        }
+        .title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        .settings-section {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .settings-section h2 {
+            font-size: 1.2rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+        .slider-container {
+            margin: 0.5rem 0;
+        }
+        .slider-container label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .slider {
+            width: 100%;
+            height: 4px;
+            background: #ddd;
+            outline: none;
+            border-radius: 2px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #3498db;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .difficulty-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .difficulty-button {
+            flex: 1;
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .difficulty-button.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        .difficulty-button:hover {
+            background: #e0e0e0;
+        }
+        .controls-button {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .controls-button:hover {
+            background: #2980b9;
+        }
+        .checkbox-container {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        .back-button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 1.5rem;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <h1 class="title">SETTINGS</h1>
+        <div class="settings-section">
+            <h2>Audio</h2>
+            <div class="slider-container">
+                <label for="music">Music Volume</label>
+                <input type="range" id="music" class="slider" min="0" max="100" value="100">
+            </div>
+            <div class="slider-container">
+                <label for="sfx">Sound Effects</label>
+                <input type="range" id="sfx" class="slider" min="0" max="100" value="100">
+            </div>
+        </div>
+        <div class="settings-section">
+            <h2>Controls</h2>
+            <button class="controls-button" id="configureControls">Configure Controls</button>
+        </div>
+        <div class="settings-section">
+            <h2>Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-button" data-difficulty="easy">Easy</button>
+                <button class="difficulty-button active" data-difficulty="normal">Normal</button>
+                <button class="difficulty-button" data-difficulty="hard">Hard</button>
+            </div>
+        </div>
+        <div class="settings-section">
+            <h2>Display</h2>
+            <div class="checkbox-container">
+                <input type="checkbox" id="fullscreen">
+                <label for="fullscreen">Fullscreen</label>
+            </div>
+        </div>
+        <button class="back-button" id="backButton">Back to Main Menu</button>
+    </div>
+    <script>
+        // Difficulty buttons
+        const difficultyButtons = document.querySelectorAll('.difficulty-button');
+        difficultyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                difficultyButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                console.log(`Difficulty set to: ${button.dataset.difficulty}`);
+            });
+        });
+        // Controls configuration
+        document.getElementById('configureControls').addEventListener('click', () => {
+            console.log('Opening controls configuration...');
+        });
+        // Back button
+        document.getElementById('backButton').addEventListener('click', () => {
+            console.log('Returning to main menu...');
+        });
+        // Fullscreen toggle
+        document.getElementById('fullscreen').addEventListener('change', (e) => {
+            console.log(`Fullscreen: ${e.target.checked}`);
+        });
+        // Volume sliders
+        const sliders = document.querySelectorAll('.slider');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                console.log(`${e.target.id} volume: ${e.target.value}`);
+            });
+        });
+    </script>
+</body>
+</html>

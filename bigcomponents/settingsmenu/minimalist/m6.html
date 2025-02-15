@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .settings-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .settings-section {
+            margin-bottom: 20px;
+        }
+
+        .settings-section h2 {
+            margin-top: 0;
+        }
+
+        .slider-container {
+            margin-bottom: 10px;
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .difficulty-button {
+            padding: 10px;
+            background-color: #eee;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .difficulty-button.active {
+            background-color: #ccc;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <h1>Game Settings</h1>
+
+        <div class="settings-section">
+            <h2>Audio</h2>
+            <div class="slider-container">
+                <label for="music">Music Volume</label>
+                <input type="range" id="music" min="0" max="100" value="100">
+            </div>
+            <div class="slider-container">
+                <label for="sfx">Sound Effects</label>
+                <input type="range" id="sfx" min="0" max="100" value="100">
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Difficulty</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-button" data-difficulty="easy">Easy</button>
+                <button class="difficulty-button active" data-difficulty="normal">Normal</button>
+                <button class="difficulty-button" data-difficulty="hard">Hard</button>
+            </div>
+        </div>
+
+        <button>Back to Main Menu</button>
+    </div>
+
+    <script>
+        // Difficulty buttons
+        const difficultyButtons = document.querySelectorAll('.difficulty-button');
+        difficultyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                difficultyButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                console.log(`Difficulty set to: ${button.dataset.difficulty}`);
+            });
+        });
+
+        // Volume sliders
+        const sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                console.log(`${e.target.id} volume: ${e.target.value}`);
+            });
+        });
+    </script>
+</body>
+</html>
