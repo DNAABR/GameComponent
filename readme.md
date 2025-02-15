@@ -1,23 +1,3 @@
-game-project/
-├── index.html         // Main HTML file
-├── style.css          // CSS for styling
-├── script.js         // Main JavaScript file (Game class and component instantiation)
-├── components/        // Folder for game components
-│   ├── ui.js          // UI component
-│   ├── input.js        // Input handling component
-│   ├── state.js       // Game state management component
-│   ├── logic.js       // Game logic component
-│   ├── timer.js       // Timer component
-│   ├── animator.js    // Animation component
-│   └── audio.js       // Audio component (optional)
-├── assets/            // Folder for game assets
-│   ├── images/        // Images for sprites, backgrounds, etc.
-│   ├── sounds/        // Sound effects and music
-│   └── ...            // Other assets
-└── lib/               // Folder for external libraries (if any)
-    └── ...            // External JS libraries
-
-
 
 
 1. **Main Menu Screen**  

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+        }
+
+        .menu-container {
+            text-align: center;
+            color: white;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            margin: 20px auto;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px auto;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="logo">
+            <!-- Placeholder for game icon -->
+            🎮
+        </div>
+        <h1 class="title">GAME TITLE</h1>
+        <button id="playBtn">PLAY</button>
+        <button id="settingsBtn">SETTINGS</button>
+        <button id="howToPlayBtn">HOW TO PLAY</button>
+        <button id="joinUsBtn">JOIN US</button>
+        <button id="creditsBtn">CREDITS</button>
+    </div>
+
+    <script>
+        // Basic button click handlers
+        document.getElementById('playBtn').addEventListener('click', () => {
+            console.log('Play button clicked');
+            // Add game start logic here
+        });
+
+        document.getElementById('settingsBtn').addEventListener('click', () => {
+            console.log('Settings button clicked');
+            // Add settings menu logic here
+        });
+
+        document.getElementById('howToPlayBtn').addEventListener('click', () => {
+            console.log('How to Play button clicked');
+            // Add tutorial logic here
+        });
+
+        document.getElementById('joinUsBtn').addEventListener('click', () => {
+            console.log('Join Us button clicked');
+            // Add join/registration logic here
+        });
+
+        document.getElementById('creditsBtn').addEventListener('click', () => {
+            console.log('Credits button clicked');
+            // Add credits display logic here
+        });
+    </script>
+</body>
+</html>

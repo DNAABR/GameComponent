@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Main Menu</title>
+  <style>
+    /* Minimal styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .menu-container {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      width: 300px;
+    }
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 10px;
+      background: #ccc;
+      line-height: 100px;
+      color: #333;
+      font-weight: bold;
+    }
+    .title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .menu-buttons button, .menu-buttons a {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      background: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .menu-buttons button:hover, .menu-buttons a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="logo">LOGO ICON</div>
+    <div class="title">TITLE NAME</div>
+    <div class="menu-buttons">
+      <button id="playBtn">PLAY/START</button>
+      <button id="settingsBtn">SETTINGS</button>
+      <a href="#" id="howToPlayBtn">HOW TO PLAY</a>
+      <a href="#" id="joinUsBtn">JOIN US</a>
+      <a href="#" id="creditsBtn">CREDITS</a>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript event listeners for each button/link
+    document.getElementById("playBtn").addEventListener("click", function() {
+      alert("Play/Start clicked!");
+    });
+
+    document.getElementById("settingsBtn").addEventListener("click", function() {
+      alert("Settings clicked!");
+    });
+
+    document.getElementById("howToPlayBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      alert("How To Play clicked!");
+    });
+
+    document.getElementById("joinUsBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      alert("Join Us clicked!");
+    });
+
+    document.getElementById("creditsBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      alert("Credits clicked!");
+    });
+  </script>
+</body>
+</html>
