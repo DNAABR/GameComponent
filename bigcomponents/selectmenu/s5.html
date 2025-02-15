@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level Menu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .level-menu-container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            width: 80%;
+        }
+
+        .level-icon {
+            font-size: 4rem;
+            margin: 1rem;
+        }
+
+        .level-info {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .completion-bar {
+            width: 100%;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .locked-level {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .scroll-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .scroll-button {
+            padding: 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .scroll-button:hover {
+            background: #2980b9;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+        }
+
+        .rewards {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="level-menu-container">
+        <button class="back-button" id="backButton">BACK</button>
+        <div class="level-icon">🏆</div>
+        <div class="level-info">Level 1: Forest</div>
+        <div class="completion-bar" style="width: 50%;"></div>
+        <div class="level-buttons">
+            <button class="level-button" id="level1Button">PLAY</button>
+            <button class="level-button" id="level2Button" disabled>LOCKED</button>
+            <button class="level-button" id="level3Button" disabled>LOCKED</button>
+        </div>
+        <div class="scroll-buttons">
+            <button class="scroll-button" id="prevButton">PREV</button>
+            <button class="scroll-button" id="nextButton">NEXT</button>
+        </div>
+        <div class="rewards">
+            Rewards:
+            <ul>
+                <li>10 coins</li>
+                <li>5 gems</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Button event listeners
+        document.getElementById('backButton').addEventListener('click', () => {
+            console.log('Going back...');
+            // Add back logic here
+        });
+
+        document.getElementById('level1Button').addEventListener('click', () => {
+            console.log('Playing level 1...');
+            // Add level 1 play logic here
+        });
+
+        document.getElementById('prevButton').addEventListener('click', () => {
+            console.log('Going to previous level...');
+            // Add previous level logic here
+        });
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            console.log('Going to next level...');
+            // Add next level logic here
+        });
+    </script>
+</body>
+</html>

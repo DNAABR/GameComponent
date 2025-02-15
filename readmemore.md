@@ -39,13 +39,6 @@ Menu
 How to Play
 Quit
 
-Continue Game (instead of “Resume Button”)
-Retry Level (instead of “Restart Level”)
-Options (instead of “Settings”)
-Main Menu (or Home Base if you prefer a more casual tone)
-Help & Support (instead of “help”)
-Exit Game (instead of “Quit / Exit Game”)
-
 
 LEVEL MENU:
 
