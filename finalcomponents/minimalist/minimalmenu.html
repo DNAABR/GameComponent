@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Main Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            color: #2d3436;
+        }
+
+        .menu-container {
+            text-align: center;
+            padding: 2rem 3rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .menu-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.75rem 0;
+            background: #2d3436;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-button:hover {
+            background: #434d52;
+            transform: translateY(-1px);
+        }
+
+        .menu-button:active {
+            transform: translateY(0);
+        }
+
+        .menu-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .menu-links a {
+            color: #636e72;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .menu-links a:hover {
+            color: #2d3436;
+        }
+
+        .menu-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #2d3436;
+            transition: width 0.2s ease;
+        }
+
+        .menu-links a:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="logo">🎮</div>
+        <h1 class="title">HORIZON</h1>
+        
+        <button class="menu-button" id="playButton">Start Game</button>
+        <button class="menu-button" id="settingsButton">Settings</button>
+        
+        <div class="menu-links">
+            <a id="howToPlay">Guide</a>
+            <a id="joinUs">Community</a>
+            <a id="credits">Credits</a>
+        </div>
+    </div>
+
+    <!-- Same JavaScript as before -->
+</body>
+</html>

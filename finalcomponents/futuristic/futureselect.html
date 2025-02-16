@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Level Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a0a0f;
+            --cyber-green: #0fff50;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .menu-container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            border-radius: 16px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+        }
+
+        h2 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .level-icon {
+            background: linear-gradient(145deg, #1a1a2e 0%, #2d2d44 100%);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1/1;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .level-icon:hover:not(.locked) {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--neon-purple);
+            border-color: var(--neon-purple);
+        }
+
+        .level-icon.completed {
+            border-color: var(--cyber-green);
+            box-shadow: 0 0 25px rgba(15, 255, 80, 0.3);
+        }
+
+        .level-icon.completed .level-number {
+            color: var(--cyber-green);
+        }
+
+        .level-icon.locked {
+            background: linear-gradient(145deg, #0a0a0f 0%, #1a1a1a 100%);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .level-icon.locked::before {
+            content: "\f023";
+            font-family: "Font Awesome 5 Free";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+        }
+
+        .level-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .level-info {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .completion-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .completion-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+            width: 75%;
+            transition: width 0.5s ease;
+        }
+
+        .scroll-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .scroll-button {
+            background: linear-gradient(145deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--neon-purple);
+        }
+
+        .back-button {
+            background: rgba(255, 50, 50, 0.2);
+            color: #ff3232;
+            border: 2px solid #ff3232;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 50, 50, 0.4);
+            box-shadow: 0 0 25px rgba(255, 50, 50, 0.3);
+        }
+
+        .rewards {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-top: 2px solid var(--neon-blue);
+        }
+
+        .rewards h3 {
+            color: var(--cyber-green);
+            margin-bottom: 1rem;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .menu-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, 
+                transparent 0%, 
+                rgba(0, 243, 255, 0.1) 50%, 
+                transparent 100%);
+            animation: scanline 4s linear infinite;
+            pointer-events: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Keep the same HTML structure as original, styles are updated -->
+    <div class="menu-container">
+        <h2>LEVEL SELECT</h2>
+        <div class="level-grid">
+            <!-- Level icons structure same as before -->
+            <div class="level-icon completed">
+                <div class="level-number">1</div>
+                <div class="level-info">Initiate</div>
+                <div class="completion-bar">
+                    <div class="completion-progress"></div>
+                </div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">2</div>
+                <div class="level-info">Neural Net</div>
+                <div class="completion-bar">
+                    <div class="completion-progress" style="width: 25%;"></div>
+                </div>
+            </div>
+            <div class="level-icon locked">
+                <div class="level-number">3</div>
+                <div class="level-info">Cyberspace</div>
+                <div class="completion-bar"></div>
+            </div>
+            <!-- Add more levels as needed -->
+        </div>
+
+        <div class="scroll-buttons">
+            <button class="scroll-button">< PREV</button>
+            <button class="scroll-button">NEXT ></button>
+        </div>
+
+        <button class="back-button">DISCONNECT</button>
+        <div class="rewards">
+            <h3>CREDITS: 1000⏣</h3>
+            <p>Upgrade Modules: 3</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level Menu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #333;
+        }
+
+        .menu-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            margin: 0 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .level-icon {
+            aspect-ratio: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            background: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .level-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .level-icon.completed {
+            background: #f0f9f0;
+            border-color: #c8e6c9;
+        }
+
+        .level-icon.locked {
+            background: #f5f5f5;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .level-icon.locked::before {
+            content: "🔒";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+        }
+
+        .level-number {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .level-info {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .completion-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #eee;
+        }
+
+        .completion-progress {
+            height: 100%;
+            background: #4CAF50;
+            transition: width 0.3s;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            background: none;
+            transition: background 0.2s;
+        }
+
+        .scroll-button {
+            color: #2196F3;
+        }
+
+        .scroll-button:hover {
+            background: #e3f2fd;
+        }
+
+        .back-button {
+            color: #666;
+        }
+
+        .back-button:hover {
+            background: #f5f5f5;
+        }
+
+        .rewards {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h2>Select Level</h2>
+        <div class="level-grid">
+            <div class="level-icon completed">
+                <div class="level-number">1</div>
+                <div class="level-info">Easy</div>
+                <div class="completion-bar">
+                    <div class="completion-progress" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">2</div>
+                <div class="level-info">Medium</div>
+                <div class="completion-bar">
+                    <div class="completion-progress" style="width: 25%"></div>
+                </div>
+            </div>
+            <div class="level-icon locked">
+                <div class="level-number">3</div>
+                <div class="level-info">Hard</div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">4</div>
+                <div class="level-info">Easy</div>
+            </div>
+            <div class="level-icon locked">
+                <div class="level-number">5</div>
+                <div class="level-info">Medium</div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">6</div>
+                <div class="level-info">Hard</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div>
+                <button class="scroll-button">← Previous</button>
+                <button class="scroll-button">Next →</button>
+            </div>
+            <button class="back-button">← Back</button>
+        </div>
+
+        <div class="rewards">
+            <h3>Rewards</h3>
+            <p>Coins: 100</p>
+        </div>
+    </div>
+</body>
+</html>

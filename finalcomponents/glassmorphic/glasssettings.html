@@ -13,7 +13,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #1a1a1a;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
             font-family: Arial, sans-serif;
             color: white;
         }
@@ -21,14 +21,18 @@
         .settings-container {
             text-align: center;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
             min-width: 300px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
         .title {
             font-size: 2.5rem;
             margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .settings-section {
@@ -37,10 +41,11 @@
         }
 
         .settings-section h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
+            font-weight: 300;
         }
 
         .slider-container {
@@ -50,11 +55,31 @@
         .slider-container label {
             display: block;
             margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .slider {
             width: 100%;
-            margin: 0.5rem 0;
+            height: 5px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
         }
 
         .difficulty-buttons {
@@ -66,60 +91,92 @@
         .difficulty-button {
             flex: 1;
             padding: 0.5rem;
-            background: #34495e;
-            border: none;
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             color: white;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
         .difficulty-button.active {
-            background: #3498db;
+            background: rgba(52, 152, 219, 0.3);
+            border-color: rgba(52, 152, 219, 0.5);
         }
 
         .difficulty-button:hover {
-            background: #2980b9;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .controls-button {
             width: 100%;
             padding: 1rem;
             margin: 0.5rem 0;
-            background: #3498db;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
         .controls-button:hover {
-            background: #2980b9;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .checkbox-container {
             margin: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background: rgba(52, 152, 219, 0.3);
+            border-color: rgba(52, 152, 219, 0.5);
+        }
+
+        .checkbox-container input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
         }
 
         .back-button {
             width: 100%;
             padding: 1rem;
             margin-top: 2rem;
-            background: #e74c3c;
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.3);
             color: white;
-            border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
 
         .back-button:hover {
-            background: #c0392b;
+            background: rgba(231, 76, 60, 0.3);
         }
     </style>
 </head>
 <body>
+    <!-- Keep the same HTML structure as original -->
     <div class="settings-container">
         <h1 class="title">SETTINGS</h1>
 
@@ -160,6 +217,7 @@
         <button class="back-button" id="backButton">Back to Main Menu</button>
     </div>
 
+    <!-- Keep the same JavaScript as original -->
     <script>
         // Difficulty buttons
         const difficultyButtons = document.querySelectorAll('.difficulty-button');

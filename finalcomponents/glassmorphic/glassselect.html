@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphic Level Menu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        /* Background shapes for depth */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            filter: blur(90px);
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #4ECDC4;
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            filter: blur(90px);
+            z-index: -1;
+        }
+
+        .menu-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .level-icon {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1/1;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .level-icon:hover:not(.locked) {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .level-icon.completed {
+            background: rgba(78, 205, 196, 0.2);
+        }
+
+        .level-icon.locked {
+            background: rgba(0, 0, 0, 0.1);
+            cursor: not-allowed;
+        }
+
+        .level-icon.locked::before {
+            content: "\f023";
+            font-family: "FontAwesome";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .level-number {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-info {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .completion-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .completion-progress {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            transition: width 0.3s ease;
+        }
+
+        .scroll-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .scroll-button, .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 25px;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-button:hover, .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .rewards {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+        }
+
+        .rewards h3 {
+            margin: 0 0 0.5rem 0;
+            font-weight: 300;
+            font-size: 1.3rem;
+        }
+
+        .rewards p {
+            margin: 0;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <div class="menu-container">
+        <h2>Select Level</h2>
+        <div class="level-grid">
+            <div class="level-icon completed">
+                <div class="level-number">1</div>
+                <div class="level-info">Easy</div>
+                <div class="completion-bar">
+                    <div class="completion-progress" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">2</div>
+                <div class="level-info">Medium</div>
+                <div class="completion-bar">
+                    <div class="completion-progress" style="width: 25%;"></div>
+                </div>
+            </div>
+            <div class="level-icon locked">
+                <div class="level-number">3</div>
+                <div class="level-info">Hard</div>
+                <div class="completion-bar"></div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">4</div>
+                <div class="level-info">Easy</div>
+                <div class="completion-bar"></div>
+            </div>
+            <div class="level-icon locked">
+                <div class="level-number">5</div>
+                <div class="level-info">Medium</div>
+                <div class="completion-bar"></div>
+            </div>
+            <div class="level-icon">
+                <div class="level-number">6</div>
+                <div class="level-info">Hard</div>
+                <div class="completion-bar"></div>
+            </div>
+        </div>
+
+        <div class="scroll-buttons">
+            <button class="scroll-button">Previous</button>
+            <button class="scroll-button">Next</button>
+        </div>
+
+        <button class="back-button">Back</button>
+        <div class="rewards">
+            <h3>Rewards</h3>
+            <p>Coins: 100</p>
+        </div>
+    </div>
+</body>
+</html>
