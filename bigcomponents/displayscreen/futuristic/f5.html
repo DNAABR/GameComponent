@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Game HUD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background: #1a1e2e;
+            color: #4fd1c5;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(6, 182, 212, 0.1));
+        }
+
+        .hud-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(79, 209, 197, 0.3);
+            z-index: 10;
+        }
+
+        .hud-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Health Bar Styles */
+        .health-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .health-label {
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+        }
+
+        .health-bar {
+            position: relative;
+            width: 200px;
+            height: 8px;
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .health-fill {
+            position: relative;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .health-scanner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .stat-box {
+            position: relative;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            border-radius: 0.5rem;
+        }
+
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: rgba(79, 209, 197, 0.2);
+            border-radius: 0.7rem;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-box:hover::before {
+            opacity: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 1.125rem;
+            font-weight: bold;
+        }
+
+        /* Pause Button */
+        .pause-section {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .pause-button {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .pause-button:hover {
+            border-color: #4fd1c5;
+        }
+
+        .pause-button::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: rgba(79, 209, 197, 0.2);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pause-button:hover::before {
+            opacity: 1;
+        }
+
+        /* Game Area */
+        .game-area {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Corner Decorations */
+        .corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+        }
+
+        .top-left {
+            top: 0;
+            left: 0;
+            border-left: 2px solid rgba(79, 209, 197, 0.3);
+            border-top: 2px solid rgba(79, 209, 197, 0.3);
+        }
+
+        .top-right {
+            top: 0;
+            right: 0;
+            border-right: 2px solid rgba(79, 209, 197, 0.3);
+            border-top: 2px solid rgba(79, 209, 197, 0.3);
+        }
+
+        .bottom-left {
+            bottom: 0;
+            left: 0;
+            border-left: 2px solid rgba(79, 209, 197, 0.3);
+            border-bottom: 2px solid rgba(79, 209, 197, 0.3);
+        }
+
+        .bottom-right {
+            bottom: 0;
+            right: 0;
+            border-right: 2px solid rgba(79, 209, 197, 0.3);
+            border-bottom: 2px solid rgba(79, 209, 197, 0.3);
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(79, 209, 197, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="background-animation"></div>
+        
+        <!-- HUD -->
+        <div class="hud-container">
+            <div class="hud-content">
+                <!-- Health Bar -->
+                <div class="health-section">
+                    <span class="health-label">Health</span>
+                    <div class="health-bar">
+                        <div class="health-fill">
+                            <div class="health-scanner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-section">
+                    <div class="stat-box">
+                        <div class="stat-label">SCORE</div>
+                        <div class="stat-value">1200</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">TIME</div>
+                        <div class="stat-value">02:34</div>
+                    </div>
+                </div>
+
+                <!-- Pause Button -->
+                <div class="pause-section">
+                    <button class="pause-button" id="pauseButton">⏸️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            GAME AREA
+        </div>
+
+        <!-- Corner Decorations -->
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+    </div>
+
+    <script>
+        const pauseButton = document.getElementById('pauseButton');
+        let isPaused = false;
+
+        pauseButton.addEventListener('click', () => {
+            isPaused = !isPaused;
+            pauseButton.textContent = isPaused ? '▶️' : '⏸️';
+            console.log(isPaused ? 'Game Paused' : 'Game Resumed');
+        });
+
+        // Optional: Animate health bar for demo
+        const healthFill = document.querySelector('.health-fill');
+        let health = 70;
+        
+        setInterval(() => {
+            if (!isPaused) {
+                health = Math.max(0, Math.min(100, health + (Math.random() > 0.5 ? 1 : -1)));
+                healthFill.style.width = `${health}%`;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -56,6 +56,7 @@ HUD (Heads-Up Display):
 Health / energy
 Mini-map
 Score and time displays
+Pause menu button
 
 
 animations:

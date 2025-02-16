@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game HUD</title>
+    <title>Minimalist Game HUD</title>
     <style>
         body {
             margin: 0;
@@ -29,10 +29,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
+            padding: 0 1rem;
             box-sizing: border-box;
             background: rgba(0, 0, 0, 0.7);
-            border-bottom: 2px solid #3498db;
         }
 
         /* Health / Energy Bar */
@@ -42,14 +41,14 @@
             flex: 1;
         }
         .health-bar span {
-            margin-right: 1rem;
-            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            font-size: 1rem;
         }
         .health-bar div {
-            width: 150px;
-            height: 10px;
+            width: 100px;
+            height: 8px;
             background: #444;
-            border-radius: 5px;
+            border-radius: 4px;
             overflow: hidden;
         }
         .health-bar .health-fill {
@@ -64,8 +63,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            font-size: 1.2rem;
+            gap: 1rem;
+            font-size: 1rem;
         }
 
         /* Pause Icon */
@@ -73,7 +72,7 @@
             flex: 1;
             display: flex;
             justify-content: flex-end;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
         }
 
@@ -88,7 +87,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
     </style>
 </head>
