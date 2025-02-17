@@ -1,129 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game HUD</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a1a;
-            font-family: Arial, sans-serif;
-            color: white;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game HUD</title>
+  <style>
 
-        /* HUD Container */
-        .hud-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.7);
-            border-bottom: 2px solid #3498db;
-        }
+:root {
+    --base-width: 60vw;
+    --max-width: 800px;
+    --padding: clamp(1rem, 4vw, 2rem);
+    --aspect-ratio: 4 / 3;
+    --border-radius: 10px;
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --font-color: white;
+}
 
-        /* Health / Energy Bar */
-        .health-bar {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-        .health-bar span {
-            margin-right: 1rem;
-            font-size: 1.2rem;
-        }
-        .health-bar div {
-            width: 150px;
-            height: 10px;
-            background: #444;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        .health-bar .health-fill {
-            height: 100%;
-            background: #e74c3c;
-            width: 70%;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    background: #1a1a1a;
+    font-family: Arial, sans-serif;
+    color: var(--font-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        /* Score Display */
-        .score-time {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            font-size: 1.2rem;
-        }
+.game-container {
+    position: relative;
+    width: var(--base-width);
+    max-width: var(--max-width);
+    aspect-ratio: var(--aspect-ratio);
+    background: var(--secondary-color);
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+}
 
-        /* Pause Icon */
-        .pause-icon {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+.hud-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.7);
+    border-bottom: 2px solid var(--primary-color);
+    z-index: 10;
+    font-size: clamp(0.7rem, 1.5vw, 1rem);
+}
 
-        /* Game Area */
-        .game-area {
-            position: absolute;
-            top: 10%;
-            left: 0;
-            width: 100%;
-            height: 90%;
-            background: #2c3e50;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-        }
-    </style>
+.health-bar {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.health-bar span {
+    margin-right: 0.5rem;
+    white-space: nowrap;
+}
+
+.health-bar div {
+    width: clamp(60px, 15vw, 100px);
+    height: 8px;
+    background: #444;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.health-bar .health-fill {
+    height: 100%;
+    background: #e74c3c;
+    width: 70%;
+}
+
+.score-time {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    white-space: nowrap;
+}
+
+.pause-icon {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    cursor: pointer;
+}
+
+.game-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1rem, 4vw, 2rem);
+    padding-top: 15%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .hud-container {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .health-bar {
+        min-width: 80px;
+    }
+
+    .score-time {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+}
+  </style>
 </head>
 <body>
-    <!-- HUD -->
+  <div class="game-container">
     <div class="hud-container">
-        <!-- Health / Energy Bar -->
-        <div class="health-bar">
-            <span>Health:</span>
-            <div>
-                <div class="health-fill"></div>
-            </div>
+      <div class="health-bar">
+        <span>Health:</span>
+        <div>
+          <div class="health-fill"></div>
         </div>
+      </div>
 
-        <!-- Score and Time Displays -->
-        <div class="score-time">
-            <div>Score: 1200</div>
-            <div>Time: 02:34</div>
-        </div>
+      <div class="score-time">
+        <div>Score: 1200</div>
+        <div>Time: 02:34</div>
+      </div>
 
-        <!-- Pause Icon -->
-        <div class="pause-icon" id="pauseButton">⏸️</div>
+      <div class="pause-icon" id="pauseButton">⏸️</div>
     </div>
 
-    <!-- Game Area -->
-    <div class="game-area">
-        GAME AREA
+    <div class="game-content">
+      GAME AREA
     </div>
+  </div>
 
-    <script>
-        // Pause Button Event Listener
-        document.getElementById('pauseButton').addEventListener('click', () => {
-            console.log('Game Paused');
-            // Add pause logic here
-        });
-    </script>
+  <script>
+    document.getElementById('pauseButton').addEventListener('click', () => {
+      console.log('Game Paused');
+    });
+  </script>
 </body>
 </html>

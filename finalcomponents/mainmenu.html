@@ -1,113 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Main Menu</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a1a;
-            font-family: Arial, sans-serif;
-            color: white;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Main Menu</title>
+  <style>
+    :root {
+    --base-width: 60vw;
+    --max-width: 800px;
+    --padding: clamp(1rem, 4vw, 2rem);
+    --aspect-ratio: 4 / 3;
+    --border-radius: 10px;
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --font-color: white;
+}
 
-        .menu-container {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            width: 75vw; /* 4:3 aspect ratio */
-            height: 56.25vw; /* 4:3 aspect ratio */
-            max-width: 800px;
-            max-height: 600px;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    font-family: Arial, sans-serif;
+    color: var(--font-color);
+    padding: var(--padding);
+    box-sizing: border-box;
+}
 
-        .logo {
-            font-size: 4rem;
-            margin: 1rem;
-        }
+/* Menu container */
+.menu-container {
+    /* Inherit common overlay styles */
+    /* (Alternatively, add both classes in HTML: class="overlay-container menu-container") */
+    width: var(--base-width);
+    max-width: var(--max-width);
+    aspect-ratio: var(--aspect-ratio);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-        .title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
+.logo {
+    font-size: clamp(2rem, 8vw, 4rem);
+    margin: clamp(0.5rem, 2vw, 1rem);
+    animation: pulse 2s infinite;
+}
 
-        .menu-button {
-            display: block;
-            width: 200px;
-            padding: 1rem;
-            margin: 0.5rem auto;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
 
-        .menu-button:hover {
-            background: #2980b9;
-        }
+.title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: clamp(1rem, 4vw, 2rem);
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-        .menu-links {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    width: 100%;
+    max-width: min(80%, 300px);
+}
 
-        .menu-links a {
-            color: #95a5a6;
-            text-decoration: none;
-            cursor: pointer;
-        }
+.menu-button {
+    width: 100%;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    background: var(--primary-color);
+    color: var(--font-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-        .menu-links a:hover {
-            color: #ffffff;
-        }
-    </style>
+.menu-button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.menu-links {
+    margin-top: clamp(1rem, 4vw, 2rem);
+    display: flex;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.menu-links a {
+    color: #95a5a6;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem;
+}
+
+.menu-links a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+    .menu-container {
+        width: 90vw;
+        padding: 1rem;
+    }
+
+    .menu-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .menu-links a {
+        padding: 0.3rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .logo {
+        margin: 0.5rem;
+    }
+
+    .title {
+        margin-bottom: 0.5rem;
+    }
+
+    .menu-links {
+        margin-top: 0.5rem;
+    }
+}
+
+  </style>
 </head>
 <body>
-    <div class="menu-container">
-        <div class="logo">🎮</div>
-        <h1 class="title">GAME TITLE</h1>
-        
-        <button class="menu-button" id="playButton">START GAME</button>
-        <button class="menu-button" id="settingsButton">SETTINGS</button>
-        
-        <div class="menu-links">
-            <a id="howToPlay">HOW TO PLAY</a>
-            <a id="joinUs">JOIN US</a>
-            <a id="credits">CREDITS</a>
-        </div>
+  <div class="menu-container">
+    <div class="logo">🎮</div>
+    <h1 class="title">GAME TITLE</h1>
+    <div class="menu-buttons">
+      <a href="selectcopy.html" class="menu-button" id="playButton">Start Game</a>
+      <a href="settingscopy.html" class="menu-button" id="settingsButton">Settings</a>
     </div>
+    <div class="menu-links">
+      <a id="howToPlay">How to Play</a>
+      <a id="joinUs">Join Us</a>
+      <a id="credits">Credits</a>
+    </div>
+  </div>
+  
 
-    <script>
-        // Button event listeners
-        document.getElementById('playButton').addEventListener('click', () => {
-            console.log('Starting game...');
-            // Add game start logic here
-        });
+  <script>
+    // Button event listeners
+    document.getElementById('playButton').addEventListener('click', () => {
+      console.log('Starting game...');
+      // Add game start logic here
+    });
 
-        document.getElementById('settingsButton').addEventListener('click', () => {
-            console.log('Opening settings...');
-            // Add settings menu logic here
-        });
+    document.getElementById('settingsButton').addEventListener('click', () => {
+      console.log('Opening settings...');
+      // Add settings menu logic here
+    });
 
-        // Link event listeners
-        document.querySelectorAll('.menu-links a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                console.log(`Opening: ${e.target.id}`);
-                // Add respective menu logic here
-            });
-        });
-    </script>
+    // Link event listeners
+    document.querySelectorAll('.menu-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        console.log(`Opening: ${e.target.id}`);
+        // Add respective menu logic here
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Game HUD</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* HUD Container */
+        .hud-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Health / Energy Bar */
+        .health-bar {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        .health-bar span {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+        .health-bar div {
+            width: 100px;
+            height: 8px;
+            background: #444;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .health-bar .health-fill {
+            height: 100%;
+            background: #e74c3c;
+            width: 70%;
+        }
+
+        /* Score Display */
+        .score-time {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Pause Icon */
+        .pause-icon {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Game Area */
+        .game-area {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            height: 90%;
+            background: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- HUD -->
+    <div class="hud-container">
+        <!-- Health / Energy Bar -->
+        <div class="health-bar">
+            <span>Health:</span>
+            <div>
+                <div class="health-fill"></div>
+            </div>
+        </div>
+
+        <!-- Score and Time Displays -->
+        <div class="score-time">
+            <div>Score: 1200</div>
+            <div>Time: 02:34</div>
+        </div>
+
+        <!-- Pause Icon -->
+        <div class="pause-icon" id="pauseButton">⏸️</div>
+    </div>
+
+    <!-- Game Area -->
+    <div class="game-area">
+        GAME AREA
+    </div>
+
+    <script>
+        // Pause Button Event Listener
+        document.getElementById('pauseButton').addEventListener('click', () => {
+            console.log('Game Paused');
+            // Add pause logic here
+        });
+    </script>
+</body>
+</html>

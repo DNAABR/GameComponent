@@ -1,110 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Pause Menu</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.85);
-            font-family: Arial, sans-serif;
-            color: white;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Pause Menu</title>
+  <style>
+:root {
+    --base-width: 60vw;
+    --max-width: 800px;
+    --padding: clamp(1rem, 4vw, 2rem);
+    --aspect-ratio: 4 / 3;
+    --border-radius: 10px;
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --font-color: white;
+}
 
-        .pause-container {
-            text-align: center;
-            padding: 3rem;
-            background: rgba(20, 20, 20, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    font-family: Arial, sans-serif;
+    color: var(--font-color);
+}
 
-        .pause-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #3498db;
-        }
+/* Pause container */
+.pause-container {
+    /* Inherit common overlay styles */
+    width: var(--base-width);
+    max-width: var(--max-width);
+    aspect-ratio: var(--aspect-ratio);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 
-        .menu-button {
-            display: block;
-            width: 250px;
-            padding: 1rem;
-            margin: 1rem auto;
-            background: linear-gradient(to right, #3498db, #2980b9);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    background: rgba(20, 20, 20, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
 
-        .menu-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-            background: linear-gradient(to right, #2980b9, #2475a7);
-        }
+.pause-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+}
 
-        .menu-button:active {
-            transform: translateY(1px);
-        }
-    </style>
+.menu-button {
+    width: 80%;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    margin: 0.5rem auto;
+    background: linear-gradient(to right, var(--primary-color), #2980b9);
+    color: var(--font-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.menu-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    background: linear-gradient(to right, #2980b9, #2475a7);
+}
+
+.menu-button:active {
+    transform: translateY(1px);
+}
+
+  </style>
 </head>
 <body>
-    <div class="pause-container">
-        <h1 class="pause-title">PAUSED</h1>
-        <button class="menu-button" id="resumeButton">Resume</button>
-        <button class="menu-button" id="restartButton">Restart Level</button>
-        <button class="menu-button" id="settingsButton">Settings</button>
-        <button class="menu-button" id="mainMenuButton">Main Menu</button>
-        <button class="menu-button" id="helpButton">Help</button>
-    </div>
+  <div class="pause-container">
+    <h1 class="pause-title">Paused</h1>
+    <button class="menu-button" id="resumeButton">Resume</button>
+    <button class="menu-button" id="restartButton">Restart Level</button>
+    <button class="menu-button" id="settingsButton">Settings</button>
+    <button class="menu-button" id="mainMenuButton">Main Menu</button>
+    <button class="menu-button" id="helpButton">Help</button>
+  </div>
 
-    <script>
-        // Button event listeners
-        document.getElementById('resumeButton').addEventListener('click', () => {
-            console.log('Resuming game...');
-            // Add resume game logic here
-        });
+  <script>
+    // Button event listeners
+    document.getElementById('resumeButton').addEventListener('click', () => {
+      console.log('Resuming game...');
+      // Add resume game logic here
+    });
 
-        document.getElementById('restartButton').addEventListener('click', () => {
-            console.log('Restarting level...');
-            // Add level restart logic here
-        });
+    document.getElementById('restartButton').addEventListener('click', () => {
+      console.log('Restarting level...');
+      // Add level restart logic here
+    });
 
-        document.getElementById('settingsButton').addEventListener('click', () => {
-            console.log('Opening settings...');
-            // Add settings menu logic here
-        });
+    document.getElementById('settingsButton').addEventListener('click', () => {
+      console.log('Opening settings...');
+      // Add settings menu logic here
+    });
 
-        document.getElementById('mainMenuButton').addEventListener('click', () => {
-            console.log('Returning to main menu...');
-            // Add main menu navigation logic here
-        });
+    document.getElementById('mainMenuButton').addEventListener('click', () => {
+      console.log('Returning to main menu...');
+      // Add main menu navigation logic here
+    });
 
-        document.getElementById('helpButton').addEventListener('click', () => {
-            console.log('Opening help...');
-            // Add help menu logic here
-        });
+    document.getElementById('helpButton').addEventListener('click', () => {
+      console.log('Opening help...');
+      // Add help menu logic here
+    });
 
-        // Add keyboard listener for Escape key to toggle pause menu
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                console.log('Toggle pause menu');
-                // Add pause menu toggle logic here
-            }
-        });
-    </script>
+    // Add keyboard listener for Escape key to toggle pause menu
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        console.log('Toggle pause menu');
+        // Add pause menu toggle logic here
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,198 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Settings</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a1a;
-            font-family: Arial, sans-serif;
-            color: white;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Settings</title>
+  <style>
+:root {
+    --base-width: 60vw;
+    --max-width: 800px;
+    --padding: clamp(1rem, 4vw, 2rem);
+    --aspect-ratio: 4 / 3;
+    --border-radius: 10px;
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --font-color: white;
+}
 
-        .settings-container {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            min-width: 300px;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    font-family: Arial, sans-serif;
+    color: var(--font-color);
+    padding: var(--padding);
+    box-sizing: border-box;
+}
 
-        .title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
+/* Settings container */
+.settings-container {
+    /* Inherit common overlay styles */
+    width: var(--base-width);
+    max-width: var(--max-width);
+    aspect-ratio: var(--aspect-ratio);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 
-        .settings-section {
-            margin-bottom: 2rem;
-            text-align: left;
-        }
+    background: rgba(0, 0, 0, 0.85);
+    overflow-y: auto;
+    backdrop-filter: blur(5px);
+    /* Custom scrollbar styling for Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) rgba(0, 0, 0, 0.5);
+}
 
-        .settings-section h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
+/* Custom scrollbar styling for Chrome, Safari, and Opera */
+.settings-container::-webkit-scrollbar {
+    width: 8px;
+}
 
-        .slider-container {
-            margin: 1rem 0;
-        }
+.settings-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
 
-        .slider-container label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+.settings-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--primary-color), #2980b9);
+    border-radius: 10px;
+}
 
-        .slider {
-            width: 100%;
-            margin: 0.5rem 0;
-        }
+.settings-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #2980b9, #2475a7);
+}
 
-        .difficulty-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
+.title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+    text-align: center;
+}
 
-        .difficulty-button {
-            flex: 1;
-            padding: 0.5rem;
-            background: #34495e;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+.settings-section {
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    text-align: left;
+}
 
-        .difficulty-button.active {
-            background: #3498db;
-        }
+.settings-section h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
 
-        .difficulty-button:hover {
-            background: #2980b9;
-        }
+.slider-container {
+    margin: 1rem 0;
+}
 
-        .controls-button {
-            width: 100%;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+.slider-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
 
-        .controls-button:hover {
-            background: #2980b9;
-        }
+.slider {
+    width: 100%;
+    margin: 0.5rem 0;
+}
 
-        .checkbox-container {
-            margin: 1rem 0;
-        }
+.settings-button, .controls-button {
+    width: 100%;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    margin: 0.5rem 0;
+    background: linear-gradient(to right, var(--primary-color), #2980b9);
+    color: var(--font-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        .back-button {
-            width: 100%;
-            padding: 1rem;
-            margin-top: 2rem;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+.settings-button:hover, .controls-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    background: linear-gradient(to right, #2980b9, #2475a7);
+}
 
-        .back-button:hover {
-            background: #c0392b;
-        }
-    </style>
+.settings-button:active, .controls-button:active {
+    transform: translateY(1px);
+}
+
+.difficulty-buttons {
+    display: flex;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    margin: 1rem 0;
+}
+
+.difficulty-button {
+    flex: 1;
+    padding: clamp(0.4rem, 1.5vw, 0.75rem);
+    background: #34495e;
+    border: none;
+    border-radius: 8px;
+    color: var(--font-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    text-transform: uppercase;
+}
+
+.difficulty-button.active {
+    background: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+}
+
+.difficulty-button:hover {
+    transform: translateY(-1px);
+    background: #2980b9;
+}
+
+.checkbox-container {
+    margin: 1rem 0;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.back-button {
+    width: 100%;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    margin-top: clamp(1rem, 3vw, 2rem);
+    background: linear-gradient(to right, #e74c3c, #c0392b);
+    color: var(--font-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    background: linear-gradient(to right, #c0392b, #a93226);
+}
+
+@media (max-width: 768px) {
+    .settings-container {
+        width: 85vw;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-container {
+        width: 95vw;
+    }
+
+    .difficulty-buttons {
+        flex-direction: column;
+    }
+
+    .difficulty-button {
+        width: 100%;
+    }
+}
+
+  </style>
 </head>
 <body>
-    <div class="settings-container">
-        <h1 class="title">SETTINGS</h1>
+  <div class="settings-container">
+    <h1 class="title">Settings</h1>
 
-        <div class="settings-section">
-            <h2>Audio</h2>
-            <div class="slider-container">
-                <label for="music">Music Volume</label>
-                <input type="range" id="music" class="slider" min="0" max="100" value="100">
-            </div>
-            <div class="slider-container">
-                <label for="sfx">Sound Effects</label>
-                <input type="range" id="sfx" class="slider" min="0" max="100" value="100">
-            </div>
-        </div>
-
-        <div class="settings-section">
-            <h2>Controls</h2>
-            <button class="controls-button" id="configureControls">Configure Controls</button>
-        </div>
-
-        <div class="settings-section">
-            <h2>Difficulty</h2>
-            <div class="difficulty-buttons">
-                <button class="difficulty-button" data-difficulty="easy">Easy</button>
-                <button class="difficulty-button active" data-difficulty="normal">Normal</button>
-                <button class="difficulty-button" data-difficulty="hard">Hard</button>
-            </div>
-        </div>
-
-        <div class="settings-section">
-            <h2>Display</h2>
-            <div class="checkbox-container">
-                <input type="checkbox" id="fullscreen">
-                <label for="fullscreen">Fullscreen</label>
-            </div>
-        </div>
-
-        <button class="back-button" id="backButton">Back to Main Menu</button>
+    <div class="settings-section">
+      <h2>Audio</h2>
+      <div class="slider-container">
+        <label for="music">Music Volume</label>
+        <input type="range" id="music" class="slider" min="0" max="100" value="100">
+      </div>
+      <div class="slider-container">
+        <label for="sfx">Sound Effects</label>
+        <input type="range" id="sfx" class="slider" min="0" max="100" value="100">
+      </div>
     </div>
 
-    <script>
-        // Difficulty buttons
-        const difficultyButtons = document.querySelectorAll('.difficulty-button');
-        difficultyButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                difficultyButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                console.log(`Difficulty set to: ${button.dataset.difficulty}`);
-            });
-        });
+    <div class="settings-section">
+      <h2>Controls</h2>
+      <button class="controls-button" id="configureControls">Configure Controls</button>
+    </div>
 
-        // Controls configuration
-        document.getElementById('configureControls').addEventListener('click', () => {
-            console.log('Opening controls configuration...');
-        });
+    <div class="settings-section">
+      <h2>Difficulty</h2>
+      <div class="difficulty-buttons">
+        <button class="difficulty-button" data-difficulty="easy">Easy</button>
+        <button class="difficulty-button active" data-difficulty="normal">Normal</button>
+        <button class="difficulty-button" data-difficulty="hard">Hard</button>
+      </div>
+    </div>
 
-        // Back button
-        document.getElementById('backButton').addEventListener('click', () => {
-            console.log('Returning to main menu...');
-        });
+    <div class="settings-section">
+      <h2>Display</h2>
+      <div class="checkbox-container">
+        <input type="checkbox" id="fullscreen">
+        <label for="fullscreen">Fullscreen</label>
+      </div>
+    </div>
 
-        // Fullscreen toggle
-        document.getElementById('fullscreen').addEventListener('change', (e) => {
-            console.log(`Fullscreen: ${e.target.checked}`);
-        });
+    <button class="back-button" id="backButton">Back to Main Menu</button>
+  </div>
 
-        // Volume sliders
-        const sliders = document.querySelectorAll('.slider');
-        sliders.forEach(slider => {
-            slider.addEventListener('input', (e) => {
-                console.log(`${e.target.id} volume: ${e.target.value}`);
-            });
-        });
-    </script>
+  <script>
+    // Difficulty buttons
+    const difficultyButtons = document.querySelectorAll('.difficulty-button');
+    difficultyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        difficultyButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        console.log(`Difficulty set to: ${button.dataset.difficulty}`);
+      });
+    });
+
+    // Controls configuration
+    document.getElementById('configureControls').addEventListener('click', () => {
+      console.log('Opening controls configuration...');
+    });
+
+    // Back button
+    document.getElementById('backButton').addEventListener('click', () => {
+      console.log('Returning to main menu...');
+    });
+
+    // Fullscreen toggle
+    document.getElementById('fullscreen').addEventListener('change', (e) => {
+      console.log(`Fullscreen: ${e.target.checked}`);
+    });
+
+    // Volume sliders
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+      slider.addEventListener('input', (e) => {
+        console.log(`${e.target.id} volume: ${e.target.value}`);
+      });
+    });
+  </script>
 </body>
 </html>
